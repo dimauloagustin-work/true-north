@@ -1,0 +1,30 @@
+version: '3.2'
+services:
+  back:
+    container_name: back
+    build:
+      context: ./back/local
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+      - '9662:9662'
+    volumes:
+      - ./back:/app
+    depends_on:
+      db:
+        condition: service_started
+
+  db:
+    image: 'mariadb:10.5'
+    container_name: db
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=main
+    volumes:
+      - app_database_volume:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+volumes:
+  app_database_volume:
