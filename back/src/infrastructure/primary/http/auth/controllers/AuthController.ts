@@ -7,16 +7,16 @@ import {
   Body,
 } from '@nestjs/common';
 import { UserRequest } from './Requests/UserRequest';
-import { UsersService } from 'src/application/UserService';
+import { UserService } from 'src/application/UserService';
 import { JwtService } from '@nestjs/jwt';
 import { LocalAuthGuard } from '../LocalAuthGuard';
 import { User } from 'src/domain/User';
-import { JwtAuthGuard } from '../JwtAuthGuard';
+import { JwtAuthGuard, JwtRequest } from '../JwtAuthGuard';
 
 @Controller('auth')
 export class AuthController {
   constructor(
-    private readonly userService: UsersService,
+    private readonly userService: UserService,
     private readonly jwtService: JwtService,
   ) {}
 
@@ -42,7 +42,7 @@ export class AuthController {
 
   @UseGuards(JwtAuthGuard)
   @Get('profile')
-  getProfile(@Request() req: { user: User }) {
+  getProfile(@Request() req: JwtRequest) {
     return req.user;
   }
 }

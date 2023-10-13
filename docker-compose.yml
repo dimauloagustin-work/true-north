@@ -1,5 +1,16 @@
 version: '3.2'
 services:
+  back_start:
+    container_name: back_start
+    build:
+      context: ./back/local
+      dockerfile: ./Dockerfile.start
+    volumes:
+      - ./back:/app
+    depends_on:
+      db:
+        condition: service_started
+
   back:
     container_name: back
     build:
@@ -13,6 +24,8 @@ services:
     depends_on:
       db:
         condition: service_started
+      back_start:
+        condition: service_completed_successfully
 
   db:
     image: 'mariadb:10.5'

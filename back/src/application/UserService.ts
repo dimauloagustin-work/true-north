@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { hash, compare } from 'bcrypt';
 
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { User } from './User';
 import { Operation } from './Operation';
 
@@ -16,8 +16,8 @@ export class Record {
   @Column()
   operation_response: string;
 
-  @Column()
-  date: Date;
+  @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
+  public created_at: Date;
 
   @ManyToOne(() => User, user => user.id)
   @JoinColumn({ name: 'user_id' })

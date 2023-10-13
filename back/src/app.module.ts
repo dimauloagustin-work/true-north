@@ -10,7 +10,9 @@ import { LocalStrategy } from './infrastructure/primary/http/auth/LocalStrategy'
 import { JwtStrategy } from './infrastructure/primary/http/auth/JwtStrategy';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { UsersService } from './application/UserService';
+import { UserService } from './application/UserService';
+import { AdditionOperationService } from './application/operations/AdditionOperationService';
+import { OperationsController } from './infrastructure/primary/http/operations/controllers/OperationsController';
 
 @Module({
   imports: [
@@ -22,7 +24,6 @@ import { UsersService } from './application/UserService';
       password: 'root',
       database: 'main',
       entities: [Operation, Record, User],
-      synchronize: true,
     }),
     TypeOrmModule.forFeature([Operation, Record, User]),
     PassportModule,
@@ -31,7 +32,13 @@ import { UsersService } from './application/UserService';
       signOptions: { expiresIn: '24h' },
     }),
   ],
-  controllers: [AppController, AuthController],
-  providers: [AppService, LocalStrategy, JwtStrategy, UsersService],
+  controllers: [AppController, AuthController, OperationsController],
+  providers: [
+    AppService,
+    LocalStrategy,
+    JwtStrategy,
+    UserService,
+    AdditionOperationService,
+  ],
 })
 export class AppModule {}
