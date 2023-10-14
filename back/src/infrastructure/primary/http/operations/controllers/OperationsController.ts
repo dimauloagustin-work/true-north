@@ -144,8 +144,8 @@ export class OperationsController {
   @ApiQuery({ name: 'type', type: 'string', required: false })
   @ApiQuery({ name: 'response', type: 'string', required: false })
   @ApiQuery({ name: 'balance', type: 'number', required: false })
-  @ApiQuery({ name: 'skip', type: 'number', required: false })
-  @ApiQuery({ name: 'take', type: 'number', required: false })
+  @ApiQuery({ name: 'skip', type: 'number', required: true })
+  @ApiQuery({ name: 'take', type: 'number', required: true })
   async getRecords(
     @Query() query: GetRecordsQuery,
   ): Promise<OperationsResponse> {

@@ -1,7 +1,5 @@
 import { OpenAPI, DefaultService, ApiError } from "../api";
-
-//TODO - refactor catch
-
+import { catchError } from "./Base";
 export const add = async (n1: number, n2: number) => {
   try {
     return await DefaultService.operationsControllerAddition({
@@ -9,8 +7,7 @@ export const add = async (n1: number, n2: number) => {
       n2,
     });
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -21,8 +18,7 @@ export const substract = async (n1: number, n2: number) => {
       n2,
     });
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -33,8 +29,7 @@ export const multiply = async (n1: number, n2: number) => {
       n2,
     });
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -46,8 +41,7 @@ export const divide = async (n1: number, n2: number) => {
       n2,
     });
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -58,8 +52,7 @@ export const root = async (n: number) => {
       n,
     });
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -67,8 +60,7 @@ export const randomString = async () => {
   try {
     return await DefaultService.operationsControllerRandomString();
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -88,8 +80,7 @@ export const find = async (
       type
     );
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };
 
@@ -97,7 +88,6 @@ export const remove = async (id: number) => {
   try {
     return await DefaultService.operationsControllerDeleteRecord(id);
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };

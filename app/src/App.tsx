@@ -10,7 +10,6 @@ import { OpenAPI } from "./client/api";
 
 OpenAPI.BASE = process.env["REACT_APP_URL"]!;
 
-//TODO - borrar token
 function App() {
   const [isLogged, setIsLogged] = useState(false);
 

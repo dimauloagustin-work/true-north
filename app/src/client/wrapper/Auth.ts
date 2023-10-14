@@ -1,4 +1,5 @@
-import { OpenAPI, DefaultService, ApiError } from "../api";
+import { OpenAPI, DefaultService } from "../api";
+import { catchError } from "./Base";
 
 export const login = async (usr: string, pass: string) => {
   try {
@@ -8,7 +9,6 @@ export const login = async (usr: string, pass: string) => {
     });
     OpenAPI.TOKEN = access_token;
   } catch (error) {
-    if (error instanceof ApiError) throw new Error(error.body.message);
-    throw error;
+    throw catchError(error);
   }
 };

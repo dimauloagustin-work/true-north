@@ -1,13 +1,9 @@
 import { MockProxy, mock } from 'jest-mock-extended';
 import { FindManyOptions, Like, Repository } from 'typeorm';
 import { User } from 'src/domain/User';
-import { UserService } from 'src/application/UserService';
-import { hash } from 'bcrypt';
 import { Record } from 'src/domain/Record';
 import { RecordService } from 'src/application/RecordService';
-import { OperationType } from 'src/domain/OperationType';
 import { Operation } from 'src/domain/Operation';
-//TODO - order folders
 
 describe('RecordService', () => {
   let recordRepo: MockProxy<Repository<Record>>;

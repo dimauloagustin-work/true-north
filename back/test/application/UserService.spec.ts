@@ -3,7 +3,6 @@ import { Repository } from 'typeorm';
 import { User } from 'src/domain/User';
 import { UserService } from 'src/application/UserService';
 import { hash } from 'bcrypt';
-//TODO - order folders
 
 describe('UserService', () => {
   let userRepo: MockProxy<Repository<User>>;

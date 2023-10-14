@@ -20,26 +20,31 @@ export class RecordService {
     result: Record[];
     count: number;
   }> {
-    const filters: FindOptionsWhere<Record>[] = [
-      {
-        active: true,
-      },
-    ];
+    const filters: FindOptionsWhere<Record>[] = [];
 
-    if (type)
+    if (!type ?? response ?? balance === undefined)
       filters.push({
-        operation: {
-          type: Like('%' + type + '%'),
-        },
+        active: true,
       });
-    if (response)
-      filters.push({
-        operation_response: Like('%' + response + '%'),
-      });
-    if (balance)
-      filters.push({
-        user_balance: balance,
-      });
+    else {
+      if (type)
+        filters.push({
+          operation: {
+            type: Like('%' + type + '%'),
+          },
+          active: true,
+        });
+      if (response)
+        filters.push({
+          operation_response: Like('%' + response + '%'),
+          active: true,
+        });
+      if (balance)
+        filters.push({
+          user_balance: balance,
+          active: true,
+        });
+    }
 
     const [result, count] = await this.recordRepository.findAndCount({
       relations: {
@@ -49,6 +54,7 @@ export class RecordService {
       skip: skip,
       take: take,
     });
+    console.log(filters);
     return {
       result,
       count,

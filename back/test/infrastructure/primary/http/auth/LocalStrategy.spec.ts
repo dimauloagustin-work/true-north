@@ -3,7 +3,6 @@ import { LocalStrategy } from 'src/infrastructure/primary/http/auth/LocalStrateg
 import { UserService } from 'src/application/UserService';
 import { User } from 'src/domain/User';
 import { UnauthorizedException } from '@nestjs/common';
-//TODO - order folders
 
 describe('LocalStrategy', () => {
   let userService: MockProxy<UserService>;

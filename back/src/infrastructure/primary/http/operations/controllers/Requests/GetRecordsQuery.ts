@@ -17,14 +17,12 @@ export class GetRecordsQuery {
 
   @IsInt()
   @Type(() => Number)
-  @IsOptional()
   @Min(0)
   @Max(100)
-  take: number | undefined;
+  take: number;
 
   @IsInt()
   @Type(() => Number)
-  @IsOptional()
   @Min(0)
-  skip: number | undefined;
+  skip: number;
 }

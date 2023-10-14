@@ -9,11 +9,10 @@ const History = () => {
 
   const fetchData = async () => {
     setResult(
-      //TODO - search balance not working
       await find(
         page * 5,
         5,
-        search && Number.isInteger(search) ? parseInt(search) : undefined,
+        search && !isNaN(search as unknown as number) ? parseInt(search) : undefined,
         search,
         search
       )
