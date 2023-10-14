@@ -23,51 +23,52 @@ export abstract class BaseOperationService {
     result: string;
     currentBalance: number;
   }> {
-    if (!(await this.hasEnoughBalance(userId)))
+    const operation = await this.operationRepository.findOneByOrFail({
+      type: this.type,
+    });
+    let currentBalance = await this.getBalance(userId);
+
+    if (currentBalance < operation.cost)
       throw new BadRequestException('Not enough balance');
 
     const result = await executable();
 
+    currentBalance -= operation.cost;
+    await this.registerOperation(
+      userId,
+      result,
+      currentBalance,
+      operation.id,
+      operation.cost,
+    );
+
     return {
       result: result,
-      currentBalance: await this.registerOperation(userId, result),
+      currentBalance: currentBalance,
     };
   }
 
-  protected async hasEnoughBalance(userId: number): Promise<boolean> {
-    //TODO - refactor to reuse
-    const operation = await this.operationRepository.findOneByOrFail({
-      type: this.type,
-    });
-    const currentBalance =
+  protected async getBalance(userId: number): Promise<number> {
+    return (
       this.initialBalance -
       ((await this.recordRepository.sum('amount', {
         user: { id: userId },
-      })) ?? 0);
-    return currentBalance >= operation.cost;
+      })) ?? 0)
+    );
   }
 
   protected async registerOperation(
     userId: number,
     response: string,
+    newBalance: number,
+    operationId: number,
+    operationCost: number,
   ): Promise<number> {
-    //TODO - refactor to reuse
-    const operation = await this.operationRepository.findOneByOrFail({
-      type: this.type,
-    });
-    const currentBalance =
-      this.initialBalance -
-      ((await this.recordRepository.sum('amount', {
-        user: { id: userId },
-      })) ?? 0);
-
-    const newBalance = currentBalance - operation.cost;
-
     this.recordRepository.save({
       user: { id: userId },
-      operation: { id: operation.id },
+      operation: { id: operationId },
       operation_response: response,
-      amount: operation.cost,
+      amount: operationCost,
       user_balance: newBalance,
     });
 

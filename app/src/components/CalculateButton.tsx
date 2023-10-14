@@ -1,8 +1,9 @@
 interface CalculateButtonProps {
   onClick: () => Promise<void>;
+  disabled: boolean;
 }
 
-function CalculateButton({ onClick }: CalculateButtonProps) {
+function CalculateButton({ onClick, disabled }: CalculateButtonProps) {
   return (
     <div className="d-grid pt-2">
       <button
@@ -12,6 +13,7 @@ function CalculateButton({ onClick }: CalculateButtonProps) {
           e.preventDefault();
           await onClick();
         }}
+        disabled={disabled}
       >
         Calculate
       </button>

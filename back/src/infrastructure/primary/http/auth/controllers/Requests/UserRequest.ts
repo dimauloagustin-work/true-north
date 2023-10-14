@@ -8,4 +8,3 @@ export class UserRequest {
   @ApiProperty({ required: true })
   pass: string;
 }
-//TODO - add validation email

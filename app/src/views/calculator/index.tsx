@@ -49,6 +49,5 @@ const Calculator = () => {
     </div>
   );
 };
-//TODO - add random string
 //TODO - show balance
 export default Calculator;

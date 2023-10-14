@@ -5,7 +5,7 @@ import { find, remove } from "../../client/wrapper/Operations";
 const History = () => {
   const [result, setResult] = useState<OperationsResponse | null>(null);
   const [search, setSearch] = useState<string | undefined>();
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(0);
 
   const fetchData = async () => {
     setResult(

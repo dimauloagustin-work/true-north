@@ -5,13 +5,17 @@ import { root } from "../../../client/wrapper/Operations";
 function Root({ showResult }: { showResult: (r: string) => void }) {
   const [number1, setNumber1] = useState(0);
   const [errorMessages, setErrorMessages] = useState("");
+  const [isWaiting, setIsWaiting] = useState(false);
 
   const calculate = async () => {
     try {
+      setIsWaiting(true);
       setErrorMessages("");
       showResult((await root(number1)).result);
     } catch (err) {
       if (err instanceof Error) setErrorMessages(err.message);
+    } finally {
+      setIsWaiting(false);
     }
   };
 
@@ -27,7 +31,7 @@ function Root({ showResult }: { showResult: (r: string) => void }) {
         />
       </div>
       {errorMessages && <div className="error">{errorMessages}</div>}
-      <CalculateButton onClick={calculate} />
+      <CalculateButton onClick={calculate} disabled={isWaiting} />
     </>
   );
 }
