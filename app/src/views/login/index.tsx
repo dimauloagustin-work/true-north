@@ -22,8 +22,8 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-inner">
+    <div className="wrapper">
+      <div className="inner s-inner">
         <form action="" onSubmit={submit}>
           <h3>Sign In</h3>
           <div className="mb-3">

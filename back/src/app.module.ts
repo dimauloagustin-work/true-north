@@ -35,7 +35,7 @@ import { RandomStringRepository } from './infrastructure/secondary/web-services/
     TypeOrmModule.forFeature([Operation, Record, User]),
     PassportModule,
     JwtModule.register({
-      secret: 'test', //TODO - move to env
+      secret: process.env['JWT_SECRET'],
       signOptions: { expiresIn: '24h' },
     }),
   ],

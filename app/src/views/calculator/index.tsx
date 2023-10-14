@@ -12,8 +12,8 @@ const Calculator = () => {
   const [result, setResult] = useState("");
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-inner">
+    <div className="wrapper">
+      <div className="inner s-inner">
         <h3>Calculator</h3>
         <div className="container">
           <div className="row row-cols-3">

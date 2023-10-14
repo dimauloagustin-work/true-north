@@ -21,6 +21,8 @@ services:
       - '9662:9662'
     volumes:
       - ./back:/app
+    environment:
+      - JWT_SECRET=test
     depends_on:
       db:
         condition: service_started

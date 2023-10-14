@@ -24,8 +24,8 @@ const History = () => {
   }, [search, page]);
 
   return (
-    <div className="auth-wrapper">
-      <div className="auth-inner">
+    <div className="wrapper">
+      <div className="inner b-inner">
         <h3>History</h3>
         <div className="container" style={{ textAlign: "center" }}>
           <div className="mb-3">
@@ -120,5 +120,3 @@ const History = () => {
 };
 
 export default History;
-
-//TODO fix size
