@@ -1,7 +1,5 @@
 import { OpenAPI, DefaultService, ApiError } from "../api";
 
-OpenAPI.BASE = "http://localhost:3000";
-
 //TODO - refactor catch
 
 export const add = async (n1: number, n2: number) => {

@@ -11,8 +11,8 @@ export class RecordService {
   ) {}
 
   async find(
-    skip: number | undefined = undefined,
-    take: number | undefined = undefined,
+    skip: number,
+    take: number,
     type: string | undefined = undefined,
     response: string | undefined = undefined,
     balance: number | undefined = undefined,

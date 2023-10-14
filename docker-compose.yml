@@ -1,19 +1,5 @@
 version: '3.2'
 services:
-  app:
-    container_name: app
-    build:
-      context: ./app
-    restart: unless-stopped
-    ports:
-      - '3001:3001'
-      - '9663:9662'
-    volumes:
-      - ./app:/app
-    depends_on:
-      back:
-        condition: service_started
-
   back_start:
     container_name: back_start
     build:

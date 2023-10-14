@@ -6,6 +6,10 @@ import { UserContext } from "./UserContext";
 import { useState } from "react";
 import Calculator from "./views/calculator";
 import History from "./views/history";
+import { OpenAPI } from "./client/api";
+
+OpenAPI.BASE = process.env["REACT_APP_URL"]!;
+
 //TODO - borrar token
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -54,16 +58,16 @@ function App() {
               )}
             </div>
           </nav>
-              {isLogged ? (
-                <Routes>
-                  <Route path="/" element={<Login />} />
-                  <Route path="/sign-in" element={<Login />} />
-                  <Route path="/calculator" element={<Calculator />} />
-                  <Route path="/history" element={<History />} />
-                </Routes>
-              ) : (
-                <Login />
-              )}
+          {isLogged ? (
+            <Routes>
+              <Route path="/" element={<Login />} />
+              <Route path="/sign-in" element={<Login />} />
+              <Route path="/calculator" element={<Calculator />} />
+              <Route path="/history" element={<History />} />
+            </Routes>
+          ) : (
+            <Login />
+          )}
         </div>
       </Router>
     </UserContext.Provider>

@@ -15,7 +15,7 @@ export class UserService {
     return await this.usersRepository.findOne({ where: { username: name } });
   }
 
-  async create(name: string, pass: string): Promise<User | null> {
+  async create(name: string, pass: string): Promise<User> {
     const hpass = await hash(pass, 10);
 
     return await this.usersRepository.save({

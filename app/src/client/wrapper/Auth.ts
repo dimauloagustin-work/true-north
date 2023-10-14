@@ -1,7 +1,5 @@
 import { OpenAPI, DefaultService, ApiError } from "../api";
 
-OpenAPI.BASE = "http://localhost:3000";
-
 export const login = async (usr: string, pass: string) => {
   try {
     const { access_token } = await DefaultService.authControllerLogin({

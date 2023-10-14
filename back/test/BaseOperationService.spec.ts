@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Record } from 'src/domain/Record';
 import { OperationType } from 'src/domain/OperationType';
 //TODO - order folders
+//TODO - add more tests
 describe('BaseOperationService', () => {
   let operationRepo: MockProxy<Repository<Operation>>;
   let recordRepo: MockProxy<Repository<Record>>;
