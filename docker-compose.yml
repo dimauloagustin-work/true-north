@@ -6,7 +6,10 @@ services:
       context: ./app
     restart: unless-stopped
     ports:
-      - '80:80'
+      - '3001:3001'
+      - '9663:9662'
+    volumes:
+      - ./app:/app
     depends_on:
       back:
         condition: service_started
@@ -14,7 +17,7 @@ services:
   back_start:
     container_name: back_start
     build:
-      context: ./back
+      context: ./back/local
       dockerfile: ./Dockerfile.start
     volumes:
       - ./back:/app
@@ -25,10 +28,13 @@ services:
   back:
     container_name: back
     build:
-      context: ./back
+      context: ./back/local
     restart: unless-stopped
     ports:
       - '3000:3000'
+      - '9662:9662'
+    volumes:
+      - ./back:/app
     depends_on:
       db:
         condition: service_started
