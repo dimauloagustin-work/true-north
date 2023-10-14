@@ -3,6 +3,4 @@ FROM node:18-alpine
 COPY . /app
 WORKDIR /app
 
-RUN npm install
-
-ENTRYPOINT [ "npm", "run", "start" ]
+ENTRYPOINT [ "npm", "i", "&&", "npm", "run", "start" ]

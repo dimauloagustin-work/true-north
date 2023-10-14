@@ -2,6 +2,4 @@ FROM node:18-buster
 
 WORKDIR /app
 
-RUN npm install
-
 ENTRYPOINT [ "sh", "-c", "npm run start:dev" ]
