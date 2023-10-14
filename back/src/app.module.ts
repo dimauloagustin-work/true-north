@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Operation } from './domain/Operation';
 import { Record } from './domain/Record';
@@ -13,6 +12,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { UserService } from './application/UserService';
 import { AdditionOperationService } from './application/operations/AdditionOperationService';
 import { OperationsController } from './infrastructure/primary/http/operations/controllers/OperationsController';
+import { SquareRootOperationService } from './application/operations/SquareRootOperationService';
+import { DivisionOperationService } from './application/operations/DivisionOperationService';
+import { MultiplicationOperationService } from './application/operations/MultiplicationOperationService';
+import { SubtractionOperationService } from './application/operations/SubstractionOperationService';
 
 @Module({
   imports: [
@@ -32,13 +35,17 @@ import { OperationsController } from './infrastructure/primary/http/operations/c
       signOptions: { expiresIn: '24h' },
     }),
   ],
-  controllers: [AppController, AuthController, OperationsController],
+  controllers: [AuthController, OperationsController],
   providers: [
     AppService,
     LocalStrategy,
     JwtStrategy,
     UserService,
     AdditionOperationService,
+    SubtractionOperationService,
+    MultiplicationOperationService,
+    DivisionOperationService,
+    SquareRootOperationService,
   ],
 })
 export class AppModule {}

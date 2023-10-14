@@ -1,14 +1,13 @@
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, ApiResponse } from "@nestjs/swagger";
 import { IsNotIn, IsNumber } from "class-validator";
 
-export class DivisionOperation {
+export class ResultResponse {
   @ApiProperty({ required: true })
   @IsNumber()
-  n1: number;
+  currentBalance: number;
   
   @ApiProperty({ required: true })
   @IsNumber()
   @IsNotIn([0])
-  n2: number;
+  result: string;
 }
-//TODO - add validation

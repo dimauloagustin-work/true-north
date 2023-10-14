@@ -12,6 +12,8 @@ import { JwtService } from '@nestjs/jwt';
 import { LocalAuthGuard } from '../LocalAuthGuard';
 import { User } from 'src/domain/User';
 import { JwtAuthGuard, JwtRequest } from '../JwtAuthGuard';
+import { ApiCreatedResponse, ApiResponse } from '@nestjs/swagger';
+import { LoginResponse } from './Responses/LoginResponse';
 
 @Controller('auth')
 export class AuthController {
@@ -22,7 +24,13 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Body() _body: UserRequest, @Request() req: { user: User }) {
+  @ApiCreatedResponse({
+    type: LoginResponse,
+  })
+  async login(
+    @Body() _body: UserRequest,
+    @Request() req: { user: User },
+  ): Promise<LoginResponse> {
     const payload = {
       user: {
         id: req.user.id,
@@ -34,8 +42,8 @@ export class AuthController {
       access_token: this.jwtService.sign(payload),
     };
   }
-
-  @Post('register') //TODO - make rest
+  /*
+  @Post('register')
   async register(@Body() req: UserRequest) {
     await this.userService.create(req.name, req.pass);
   }
@@ -44,5 +52,5 @@ export class AuthController {
   @Get('profile')
   getProfile(@Request() req: JwtRequest) {
     return req.user;
-  }
+  }*/
 }
