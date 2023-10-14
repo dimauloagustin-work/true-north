@@ -3,7 +3,6 @@ import {
   Request,
   Post,
   UseGuards,
-  Get,
   Body,
 } from '@nestjs/common';
 import { UserRequest } from './Requests/UserRequest';
@@ -11,11 +10,13 @@ import { UserService } from 'src/application/UserService';
 import { JwtService } from '@nestjs/jwt';
 import { LocalAuthGuard } from '../LocalAuthGuard';
 import { User } from 'src/domain/User';
-import { JwtAuthGuard, JwtRequest } from '../JwtAuthGuard';
 import { ApiCreatedResponse, ApiResponse } from '@nestjs/swagger';
 import { LoginResponse } from './Responses/LoginResponse';
 
-@Controller('auth')
+@Controller({
+  path:'auth',
+  version:'1'
+})
 export class AuthController {
   constructor(
     private readonly userService: UserService,

@@ -16,6 +16,10 @@ import { SquareRootOperationService } from './application/operations/SquareRootO
 import { DivisionOperationService } from './application/operations/DivisionOperationService';
 import { MultiplicationOperationService } from './application/operations/MultiplicationOperationService';
 import { SubtractionOperationService } from './application/operations/SubstractionOperationService';
+import { RecordService } from './application/RecordService';
+import { RandomStringOperationService } from './application/operations/RandomStringOperationService';
+import { IRandomStringRepositoryKey } from './application/interfaces/IRandomStringRepository';
+import { RandomStringRepository } from './infrastructure/secondary/web-services/random-string/RandomStringRepository';
 
 @Module({
   imports: [
@@ -46,6 +50,9 @@ import { SubtractionOperationService } from './application/operations/Substracti
     MultiplicationOperationService,
     DivisionOperationService,
     SquareRootOperationService,
+    RandomStringOperationService,
+    RecordService,
+    { provide: IRandomStringRepositoryKey, useClass: RandomStringRepository },
   ],
 })
 export class AppModule {}

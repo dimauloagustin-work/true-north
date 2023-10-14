@@ -9,6 +9,8 @@ export type { OpenAPIConfig } from './core/OpenAPI';
 
 export type { DivisionOperation } from './models/DivisionOperation';
 export type { LoginResponse } from './models/LoginResponse';
+export type { OperationResponse } from './models/OperationResponse';
+export type { OperationsResponse } from './models/OperationsResponse';
 export type { ResultResponse } from './models/ResultResponse';
 export type { SquareRootOperation } from './models/SquareRootOperation';
 export type { TwoParamsOperation } from './models/TwoParamsOperation';

@@ -4,7 +4,7 @@ interface CalculateButtonProps {
 
 function CalculateButton({ onClick }: CalculateButtonProps) {
   return (
-    <div className="d-grid">
+    <div className="d-grid pt-2">
       <button
         type="submit"
         className="btn btn-primary"

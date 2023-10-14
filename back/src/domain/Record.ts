@@ -19,6 +19,9 @@ export class Record {
   @CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)" })
   public created_at: Date;
 
+  @Column({ type: "boolean", default: () => "TRUE" })
+  public active: boolean;
+
   @ManyToOne(() => User, user => user.id)
   @JoinColumn({ name: 'user_id' })
   user: User;

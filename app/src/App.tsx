@@ -5,6 +5,7 @@ import Login from "./views/login";
 import { UserContext } from "./UserContext";
 import { useState } from "react";
 import Calculator from "./views/calculator";
+import History from "./views/history";
 //TODO - borrar token
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -24,18 +25,12 @@ function App() {
               <Link className="navbar-brand" to={"/sign-in"}>
                 Challenge
               </Link>
-              <div
-                className="collapse navbar-collapse"
-                id="navbarTogglerDemo02"
-              >
-                <ul className="navbar-nav ml-auto">
-                  {!isLogged ? (
-                    <li className="nav-item">
-                      <Link className="nav-link" to={"/sign-in"}>
-                        Login
-                      </Link>
-                    </li>
-                  ) : (
+              {isLogged && (
+                <div
+                  className="collapse navbar-collapse"
+                  id="navbarTogglerDemo02"
+                >
+                  <ul className="navbar-nav ml-auto">
                     <li className="nav-item">
                       <button
                         className="nav-link"
@@ -44,25 +39,31 @@ function App() {
                         Logout
                       </button>
                     </li>
-                  )}
-                  <li className="nav-item">
-                    <Link className="nav-link" to={"/calculator"}>
-                      Calculator
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+                    <li className="nav-item">
+                      <Link className="nav-link" to={"/calculator"}>
+                        Calculator
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to={"/history"}>
+                        History
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
           </nav>
-          <div className="auth-wrapper">
-            <div className="auth-inner">
-              <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/sign-in" element={<Login />} />
-                <Route path="/calculator" element={<Calculator />} />
-              </Routes>
-            </div>
-          </div>
+              {isLogged ? (
+                <Routes>
+                  <Route path="/" element={<Login />} />
+                  <Route path="/sign-in" element={<Login />} />
+                  <Route path="/calculator" element={<Calculator />} />
+                  <Route path="/history" element={<History />} />
+                </Routes>
+              ) : (
+                <Login />
+              )}
         </div>
       </Router>
     </UserContext.Provider>

@@ -15,42 +15,46 @@ const Login = () => {
     try {
       await login(email, pass);
       userContext.login();
-      navigate("/sign-up");
+      navigate("/calculator");
     } catch (err) {
       if (err instanceof Error) setErrorMessages(err.message);
     }
   };
 
   return (
-    <form action="" onSubmit={submit}>
-      <h3>Sign In</h3>
-      <div className="mb-3">
-        <label>Email address</label>
-        <input
-          type="email"
-          className="form-control"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+    <div className="auth-wrapper">
+      <div className="auth-inner">
+        <form action="" onSubmit={submit}>
+          <h3>Sign In</h3>
+          <div className="mb-3">
+            <label>Email address</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="Enter email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="mb-3">
+            <label>Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Enter password"
+              value={pass}
+              onChange={(e) => setPass(e.target.value)}
+            />
+          </div>
+          {errorMessages && <div className="error">{errorMessages}</div>}
+          <div className="d-grid">
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </div>
+        </form>
       </div>
-      <div className="mb-3">
-        <label>Password</label>
-        <input
-          type="password"
-          className="form-control"
-          placeholder="Enter password"
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
-        />
-      </div>
-      {errorMessages && <div className="error">{errorMessages}</div>}
-      <div className="d-grid">
-        <button type="submit" className="btn btn-primary">
-          Submit
-        </button>
-      </div>
-    </form>
+    </div>
   );
 };
 

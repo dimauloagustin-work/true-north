@@ -64,3 +64,42 @@ export const root = async (n: number) => {
     throw error;
   }
 };
+
+export const randomString = async () => {
+  try {
+    return await DefaultService.operationsControllerRandomString();
+  } catch (error) {
+    if (error instanceof ApiError) throw new Error(error.body.message);
+    throw error;
+  }
+};
+
+export const find = async (
+  skip?: number | undefined,
+  take?: number | undefined,
+  balance?: number | undefined,
+  response?: string | undefined,
+  type?: string | undefined
+) => {
+  try {
+    return await DefaultService.operationsControllerGetRecords(
+      take,
+      skip,
+      balance,
+      response,
+      type
+    );
+  } catch (error) {
+    if (error instanceof ApiError) throw new Error(error.body.message);
+    throw error;
+  }
+};
+
+export const remove = async (id: number) => {
+  try {
+    return await DefaultService.operationsControllerDeleteRecord(id);
+  } catch (error) {
+    if (error instanceof ApiError) throw new Error(error.body.message);
+    throw error;
+  }
+};

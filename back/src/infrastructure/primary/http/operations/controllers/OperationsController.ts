@@ -1,4 +1,14 @@
-import { Controller, Post, UseGuards, Body, Request } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Body,
+  Request,
+  Get,
+  Query,
+  Delete,
+  Param,
+} from '@nestjs/common';
 import { JwtAuthGuard, JwtRequest } from '../../auth/JwtAuthGuard';
 import { TwoParamsOperation } from './Requests/TwoParamsOperation';
 import { DivisionOperation } from './Requests/DivisionOperation';
@@ -9,9 +19,23 @@ import { MultiplicationOperationService } from 'src/application/operations/Multi
 import { DivisionOperationService } from 'src/application/operations/DivisionOperationService';
 import { SquareRootOperationService } from 'src/application/operations/SquareRootOperationService';
 import { ResultResponse } from './Responses/ResultResponse';
-import { ApiBearerAuth, ApiCreatedResponse, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiNoContentResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiQuery,
+} from '@nestjs/swagger';
+import { RecordService } from 'src/application/RecordService';
+import { OperationsResponse } from './Responses/OperationsResponse';
+import { GetRecordsQuery } from './Requests/GetRecordsQuery';
+import { RandomStringOperationService } from 'src/application/operations/RandomStringOperationService';
 
-@Controller('operations')
+@Controller({
+  path:'operations',
+  version:'1'
+})
 @ApiBearerAuth()
 export class OperationsController {
   constructor(
@@ -20,6 +44,8 @@ export class OperationsController {
     private readonly multiplicationService: MultiplicationOperationService,
     private readonly divisionService: DivisionOperationService,
     private readonly squareRootService: SquareRootOperationService,
+    private readonly randomStringService: RandomStringOperationService,
+    private readonly recordService: RecordService,
   ) {}
 
   @UseGuards(JwtAuthGuard)
@@ -103,7 +129,41 @@ export class OperationsController {
 
   @UseGuards(JwtAuthGuard)
   @Post('random-strings')
-  async random_string(@Request() req: JwtRequest) {
-    return;
+  @ApiCreatedResponse({
+    type: ResultResponse,
+  })
+  async random_string(@Request() req: JwtRequest): Promise<ResultResponse> {
+    return await this.randomStringService.execute(req.user.payload.user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  @ApiOkResponse({
+    type: OperationsResponse,
+  })
+  @ApiQuery({ name: 'type', type: 'string', required: false })
+  @ApiQuery({ name: 'response', type: 'string', required: false })
+  @ApiQuery({ name: 'balance', type: 'number', required: false })
+  @ApiQuery({ name: 'skip', type: 'number', required: false })
+  @ApiQuery({ name: 'take', type: 'number', required: false })
+  async getRecords(
+    @Query() query: GetRecordsQuery,
+  ): Promise<OperationsResponse> {
+    const { result, count } = await this.recordService.find(
+      query.skip,
+      query.take,
+      query.type,
+      query.response,
+      query.balance,
+    );
+    return new OperationsResponse(result, count);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete('/:id')
+  @ApiNoContentResponse()
+  @ApiParam({ name: 'id', type: 'integer' })
+  async deleteRecord(@Param() id: number): Promise<void> {
+    await this.recordService.delete(id);
   }
 }

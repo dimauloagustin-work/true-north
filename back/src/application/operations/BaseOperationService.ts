@@ -13,7 +13,7 @@ export abstract class BaseOperationService {
     private readonly operationRepository: Repository<Operation>,
     private readonly recordRepository: Repository<Record>,
   ) {
-    this.initialBalance = 100;
+    this.initialBalance = 500;
   }
 
   protected async process(

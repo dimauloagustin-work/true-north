@@ -4,6 +4,7 @@
 /* eslint-disable */
 import type { DivisionOperation } from '../models/DivisionOperation';
 import type { LoginResponse } from '../models/LoginResponse';
+import type { OperationsResponse } from '../models/OperationsResponse';
 import type { ResultResponse } from '../models/ResultResponse';
 import type { SquareRootOperation } from '../models/SquareRootOperation';
 import type { TwoParamsOperation } from '../models/TwoParamsOperation';
@@ -112,13 +113,59 @@ export class DefaultService {
     }
 
     /**
-     * @returns any
+     * @returns ResultResponse
      * @throws ApiError
      */
-    public static operationsControllerRandomString(): CancelablePromise<any> {
+    public static operationsControllerRandomString(): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/operations/random-strings',
+        });
+    }
+
+    /**
+     * @param take
+     * @param skip
+     * @param balance
+     * @param response
+     * @param type
+     * @returns OperationsResponse
+     * @throws ApiError
+     */
+    public static operationsControllerGetRecords(
+        take?: number,
+        skip?: number,
+        balance?: number,
+        response?: string,
+        type?: string,
+    ): CancelablePromise<OperationsResponse> {
+        return __request(OpenAPI, {
+            method: 'GET',
+            url: '/operations',
+            query: {
+                'take': take,
+                'skip': skip,
+                'balance': balance,
+                'response': response,
+                'type': type,
+            },
+        });
+    }
+
+    /**
+     * @param id
+     * @returns void
+     * @throws ApiError
+     */
+    public static operationsControllerDeleteRecord(
+        id: number,
+    ): CancelablePromise<void> {
+        return __request(OpenAPI, {
+            method: 'DELETE',
+            url: '/operations/{id}',
+            path: {
+                'id': id,
+            },
         });
     }
 
