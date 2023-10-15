@@ -8,7 +8,7 @@ COPY package-lock.json .
 RUN npm install --production
 # Copy app files
 COPY . .
-ENV REACT_APP_URL=http://ec2-54-218-68-148.us-west-2.compute.amazonaws.com:3000/v1
+ENV REACT_APP_URL=http://ec2-54-218-68-148.us-west-2.compute.amazonaws.com:3000
 # Build the app
 RUN npm run build
 

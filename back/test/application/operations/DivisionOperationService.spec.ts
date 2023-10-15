@@ -33,6 +33,6 @@ describe('DivisionOperationService', () => {
     const res = await uut.execute(0, 2, 2);
 
     //Assert
-    expect(res.result).toBe("1")
+    expect(res).toBe("1")
   });
 });

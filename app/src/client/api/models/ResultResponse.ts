@@ -4,7 +4,6 @@
 /* eslint-disable */
 
 export type ResultResponse = {
-    currentBalance: number;
     result: string;
 };
 

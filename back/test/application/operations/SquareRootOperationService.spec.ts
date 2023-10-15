@@ -33,6 +33,6 @@ describe('SquareRootOperationService', () => {
     const res = await uut.execute(0, 4);
 
     //Assert
-    expect(res.result).toBe("2")
+    expect(res).toBe("2")
   });
 });

@@ -19,10 +19,7 @@ export abstract class BaseOperationService {
   protected async process(
     executable: () => Promise<string>,
     userId: number,
-  ): Promise<{
-    result: string;
-    currentBalance: number;
-  }> {
+  ): Promise<string> {
     const operation = await this.operationRepository.findOneByOrFail({
       type: this.type,
     });
@@ -42,10 +39,7 @@ export abstract class BaseOperationService {
       operation.cost,
     );
 
-    return {
-      result: result,
-      currentBalance: currentBalance,
-    };
+    return result;
   }
 
   protected async getBalance(userId: number): Promise<number> {

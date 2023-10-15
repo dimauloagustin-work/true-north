@@ -33,8 +33,8 @@ import { GetRecordsQuery } from './Requests/GetRecordsQuery';
 import { RandomStringOperationService } from 'src/application/operations/RandomStringOperationService';
 
 @Controller({
-  path:'operations',
-  version:'1'
+  path: 'operations',
+  version: '1',
 })
 @ApiBearerAuth()
 export class OperationsController {
@@ -57,10 +57,12 @@ export class OperationsController {
     @Body() body: TwoParamsOperation,
     @Request() req: JwtRequest,
   ): Promise<ResultResponse> {
-    return await this.additionService.execute(
-      req.user.payload.user.id,
-      body.n1,
-      body.n2,
+    return new ResultResponse(
+      await this.additionService.execute(
+        req.user.payload.user.id,
+        body.n1,
+        body.n2,
+      ),
     );
   }
 
@@ -73,10 +75,12 @@ export class OperationsController {
     @Body() body: TwoParamsOperation,
     @Request() req: JwtRequest,
   ): Promise<ResultResponse> {
-    return await this.subtractionService.execute(
-      req.user.payload.user.id,
-      body.n1,
-      body.n2,
+    return new ResultResponse(
+      await this.subtractionService.execute(
+        req.user.payload.user.id,
+        body.n1,
+        body.n2,
+      ),
     );
   }
 
@@ -89,10 +93,12 @@ export class OperationsController {
     @Body() body: TwoParamsOperation,
     @Request() req: JwtRequest,
   ): Promise<ResultResponse> {
-    return await this.multiplicationService.execute(
-      req.user.payload.user.id,
-      body.n1,
-      body.n2,
+    return new ResultResponse(
+      await this.multiplicationService.execute(
+        req.user.payload.user.id,
+        body.n1,
+        body.n2,
+      ),
     );
   }
 
@@ -105,10 +111,12 @@ export class OperationsController {
     @Body() body: DivisionOperation,
     @Request() req: JwtRequest,
   ): Promise<ResultResponse> {
-    return await this.divisionService.execute(
-      req.user.payload.user.id,
-      body.n1,
-      body.n2,
+    return new ResultResponse(
+      await this.divisionService.execute(
+        req.user.payload.user.id,
+        body.n1,
+        body.n2,
+      ),
     );
   }
 
@@ -121,9 +129,8 @@ export class OperationsController {
     @Body() body: SquareRootOperation,
     @Request() req: JwtRequest,
   ): Promise<ResultResponse> {
-    return await this.squareRootService.execute(
-      req.user.payload.user.id,
-      body.n,
+    return new ResultResponse(
+      await this.squareRootService.execute(req.user.payload.user.id, body.n),
     );
   }
 
@@ -133,7 +140,9 @@ export class OperationsController {
     type: ResultResponse,
   })
   async random_string(@Request() req: JwtRequest): Promise<ResultResponse> {
-    return await this.randomStringService.execute(req.user.payload.user.id);
+    return new ResultResponse(
+      await this.randomStringService.execute(req.user.payload.user.id),
+    );
   }
 
   @UseGuards(JwtAuthGuard)

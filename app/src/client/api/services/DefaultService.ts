@@ -26,7 +26,7 @@ export class DefaultService {
     ): CancelablePromise<LoginResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/auth/login',
+            url: '/v1/auth/login',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -42,7 +42,7 @@ export class DefaultService {
     ): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/operations/additions',
+            url: '/v1/operations/additions',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -58,7 +58,7 @@ export class DefaultService {
     ): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/operations/subtractions',
+            url: '/v1/operations/subtractions',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -74,7 +74,7 @@ export class DefaultService {
     ): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/operations/multiplications',
+            url: '/v1/operations/multiplications',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -90,7 +90,7 @@ export class DefaultService {
     ): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/operations/divisions',
+            url: '/v1/operations/divisions',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -106,7 +106,7 @@ export class DefaultService {
     ): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/operations/square-roots',
+            url: '/v1/operations/square-roots',
             body: requestBody,
             mediaType: 'application/json',
         });
@@ -119,7 +119,7 @@ export class DefaultService {
     public static operationsControllerRandomString(): CancelablePromise<ResultResponse> {
         return __request(OpenAPI, {
             method: 'POST',
-            url: '/operations/random-strings',
+            url: '/v1/operations/random-strings',
         });
     }
 
@@ -133,15 +133,15 @@ export class DefaultService {
      * @throws ApiError
      */
     public static operationsControllerGetRecords(
-        take?: number,
-        skip?: number,
+        take: number,
+        skip: number,
         balance?: number,
         response?: string,
         type?: string,
     ): CancelablePromise<OperationsResponse> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/operations',
+            url: '/v1/operations',
             query: {
                 'take': take,
                 'skip': skip,
@@ -162,7 +162,7 @@ export class DefaultService {
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/operations/{id}',
+            url: '/v1/operations/{id}',
             path: {
                 'id': id,
             },

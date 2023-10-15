@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CalculateButton from "../../../components/CalculateButton";
 import { randomString, root } from "../../../client/wrapper/Operations";
 
 function RandomString({ showResult }: { showResult: (r: string) => void }) {
   const [errorMessages, setErrorMessages] = useState("");
   const [isWaiting, setIsWaiting] = useState(false);
+
+  useEffect(() => {
+    showResult("");
+  }, []);
 
   const calculate = async () => {
     try {

@@ -51,25 +51,25 @@ describe('RecordService', () => {
     const uut = new RecordService(recordRepo);
 
     //Act
-    const res = await uut.find(1, 1, 'test', 'test', 4);
+    await uut.find(1, 1, 'test', 'test', 4);
 
     //Assert
     expect(filters?.skip).toBe(1);
     expect(filters?.take).toBe(1);
     expect(filters?.where).toEqual([
       {
-        active: true,
-      },
-      {
         operation: {
           type: Like('%test%'),
         },
+        active: true,
       },
       {
         operation_response: Like('%test%'),
+        active: true,
       },
       {
         user_balance: 4,
+        active: true,
       },
     ]);
   });

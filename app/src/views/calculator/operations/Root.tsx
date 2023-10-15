@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CalculateButton from "../../../components/CalculateButton";
 import { root } from "../../../client/wrapper/Operations";
 
@@ -6,6 +6,10 @@ function Root({ showResult }: { showResult: (r: string) => void }) {
   const [number1, setNumber1] = useState(0);
   const [errorMessages, setErrorMessages] = useState("");
   const [isWaiting, setIsWaiting] = useState(false);
+
+  useEffect(() => {
+    showResult("");
+  }, []);
 
   const calculate = async () => {
     try {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CalculateButton from "../../../components/CalculateButton";
 import { multiply } from "../../../client/wrapper/Operations";
 
@@ -7,6 +7,10 @@ function Multiplication({ showResult }: { showResult: (r: string) => void }) {
   const [number2, setNumber2] = useState(0);
   const [errorMessages, setErrorMessages] = useState("");
   const [isWaiting, setIsWaiting] = useState(false);
+
+  useEffect(() => {
+    showResult("");
+  }, []);
 
   const calculate = async () => {
     try {

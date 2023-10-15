@@ -12,7 +12,7 @@ class OperationResponse {
   balance: number;
 
   @ApiProperty({ required: true })
-  response: string;
+  result: string;
 
   @ApiProperty({ required: true })
   public type: string;
@@ -24,7 +24,7 @@ class OperationResponse {
     this.id = record.id;
     this.cost = record.amount;
     this.balance = record.user_balance;
-    this.response = record.operation_response;
+    this.result = record.operation_response;
     this.type = record.operation.type;
     this.created_at = record.created_at;
   }

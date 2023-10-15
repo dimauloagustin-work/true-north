@@ -1,4 +1,4 @@
-import { OpenAPI, DefaultService, ApiError } from "../api";
+import { DefaultService } from "../api";
 import { catchError } from "./Base";
 export const add = async (n1: number, n2: number) => {
   try {
@@ -65,8 +65,8 @@ export const randomString = async () => {
 };
 
 export const find = async (
-  skip?: number | undefined,
-  take?: number | undefined,
+  skip: number,
+  take: number,
   balance?: number | undefined,
   response?: string | undefined,
   type?: string | undefined

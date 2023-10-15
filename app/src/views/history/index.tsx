@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { OperationsResponse } from "../../client/api";
 import { find, remove } from "../../client/wrapper/Operations";
 
@@ -7,21 +7,23 @@ const History = () => {
   const [search, setSearch] = useState<string | undefined>();
   const [page, setPage] = useState<number>(0);
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     setResult(
       await find(
         page * 5,
         5,
-        search && !isNaN(search as unknown as number) ? parseInt(search) : undefined,
+        search && !isNaN(search as unknown as number)
+          ? parseInt(search)
+          : undefined,
         search,
         search
       )
     );
-  };
+  }, [page, search]);
 
   useEffect(() => {
     fetchData().catch(console.error);
-  }, [search, page]);
+  }, [search, page, fetchData]);
 
   return (
     <div className="wrapper">
@@ -61,7 +63,7 @@ const History = () => {
                         <th scope="row">{r.id}</th>
                         <td>{r.type}</td>
                         <td>{r.cost}</td>
-                        <td>{r.response}</td>
+                        <td>{r.result}</td>
                         <td>{r.balance}</td>
                         <td>{r.created_at}</td>
                         <td>

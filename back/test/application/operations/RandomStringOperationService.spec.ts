@@ -37,6 +37,6 @@ describe('RandomStringOperationService', () => {
     const res = await uut.execute(0);
 
     //Assert
-    expect(res.result).toBe("test")
+    expect(res).toBe("test")
   });
 });

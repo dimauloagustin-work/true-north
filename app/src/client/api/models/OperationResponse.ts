@@ -7,7 +7,7 @@ export type OperationResponse = {
     id: number;
     cost: number;
     balance: number;
-    response: string;
+    result: string;
     type: string;
     created_at: string;
 };
