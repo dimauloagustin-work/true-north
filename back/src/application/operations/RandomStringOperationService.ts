@@ -8,6 +8,7 @@ import {
   IRandomStringRepository,
   IRandomStringRepositoryKey,
 } from '../interfaces/IRandomStringRepository';
+import { OperationType } from 'src/domain/OperationType';
 
 @Injectable()
 export class RandomStringOperationService extends BaseOperationService {
@@ -19,13 +20,10 @@ export class RandomStringOperationService extends BaseOperationService {
     @InjectRepository(Record)
     recordRepository: Repository<Record>,
   ) {
-    super(operationRepository, recordRepository);
+    super(operationRepository, recordRepository, OperationType.RandomString);
   }
 
   async execute(userId: number) {
-    return this.process(
-      () => this.rsRepository.get(),
-      userId,
-    );
+    return this.process(() => this.rsRepository.get(), userId);
   }
 }

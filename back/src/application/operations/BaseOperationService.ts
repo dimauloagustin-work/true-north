@@ -7,11 +7,11 @@ import { Record } from 'src/domain/Record';
 @Injectable()
 export abstract class BaseOperationService {
   private readonly initialBalance: number;
-  protected readonly type: OperationType;
 
   constructor(
     private readonly operationRepository: Repository<Operation>,
     private readonly recordRepository: Repository<Record>,
+    private readonly type: OperationType
   ) {
     this.initialBalance = 500;
   }
@@ -23,6 +23,7 @@ export abstract class BaseOperationService {
     const operation = await this.operationRepository.findOneByOrFail({
       type: this.type,
     });
+    console.log(this.type);
     let currentBalance = await this.getBalance(userId);
 
     if (currentBalance < operation.cost)

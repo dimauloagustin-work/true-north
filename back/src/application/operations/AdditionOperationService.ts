@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { Operation } from 'src/domain/Operation';
 import { Record } from 'src/domain/Record';
 import { BaseOperationService } from './BaseOperationService';
+import { OperationType } from 'src/domain/OperationType';
 
 @Injectable()
 export class AdditionOperationService extends BaseOperationService {
@@ -13,7 +14,7 @@ export class AdditionOperationService extends BaseOperationService {
     @InjectRepository(Record)
     recordRepository: Repository<Record>,
   ) {
-    super(operationRepository, recordRepository);
+    super(operationRepository, recordRepository, OperationType.Addition);
   }
 
   async execute(userId: number, n1: number, n2: number) {
