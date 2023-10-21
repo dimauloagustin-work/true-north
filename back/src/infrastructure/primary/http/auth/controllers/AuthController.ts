@@ -43,12 +43,13 @@ export class AuthController {
       access_token: this.jwtService.sign(payload),
     };
   }
-  /*
+ 
   @Post('register')
   async register(@Body() req: UserRequest) {
     await this.userService.create(req.name, req.pass);
   }
-
+  
+ /*
   @UseGuards(JwtAuthGuard)
   @Get('profile')
   getProfile(@Request() req: JwtRequest) {
